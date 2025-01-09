@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daftar File</title>
+    <link rel="stylesheet" href="/styles6.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Daftar File</h1>
+        <a href="/files/add" class="btn">Tambah File Baru</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Judul File</th>
+                    <th>Deskripsi</th>
+                    <th>Opsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (files.length > 0) { %>
+                    <% files.forEach((file, index) => { %>
+                        <tr>
+                            <td><%= index + 1 %></td>
+                            <td><%= file.title %></td>
+                            <td><%= file.description %></td>
+                            <td>
+                                <a href="/files/view/<%= file.id %>" class="btn">Lihat</a>
+                                <a href="/files/edit/<%= file.id %>" class="btn">Edit</a>
+                                <form action="/files/delete/<%= file.id %>" method="POST" style="display:inline;">
+                                    <button type="submit" class="btn" onclick="return confirm('Apakah Anda yakin ingin menghapus file ini?');">Hapus</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="4">Tidak ada file yang tersedia.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
